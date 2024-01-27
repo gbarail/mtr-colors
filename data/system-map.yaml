@@ -83,33 +83,72 @@ color_names:
     pantone: 485C
     rgb: [218, 41, 28]
 
-lines_colors:
-  # Current lines
-  AEL: *dark_green
-  DRL: *pink
-  EAL: *blue
-  HSR: *dark_grey
-  ISL: *ocean_blue
-  KTL: *green
-  LRT: *gold
-  SIL: *light_green
-  SZM: *grey
-  TCL: *orange
-  TKL: *purple
-  TML: *goldenrod
-  TWL: *red
-
-  # Former lines
-  MOL: *goldenrod
-  WRL: *magenta
-
 map_element_colors:
   # Basic elements
-  background: *white
-  text: *black
-  header_background: *dark_blue
+  background:
+    name: Background
+    color: *white
+  text:
+    name: Text
+    color: *black
+  header_background:
+    name: Header background
+    color: *dark_blue
 
   # Auxiliary colors
-  sea_water: *light_blue
-  Shenzhen_land: *light_grey
-  Shenzhen_Metro: *grey
+  sea_water:
+    name: Sea water
+    color: *light_blue
+  szl:
+    name: Shenzhen land
+    color: *light_grey
+  szm:
+    name: Shenzhen Metro Network
+    color: *grey
+
+lines_colors:
+  # Current lines
+  AEL:
+    name: Airport Express
+    color: *dark_green
+  DRL:
+    name: Disneyland Resort Line
+    color: *pink
+  EAL:
+    name: East Rail Line
+    color: *blue
+  HSR:
+    name: High Speed Rail
+    color: *dark_grey
+  ISL:
+    name: Island Line
+    color: *ocean_blue
+  KTL:
+    name: Kwun Tong Line
+    color: *green
+  LRT:
+    name: Light Rail
+    color: *gold
+  SIL:
+    name: South Island Line
+    color: *light_green
+  TCL:
+    name: Tung Chung Line
+    color: *orange
+  TKL:
+    name: Tseung Kwan O Line
+    color: *purple
+  TML:
+    name: Tuen Ma Line
+    color: *goldenrod
+  TWL:
+    name: Tswen Wan Line
+    color: *red
+
+  # Former lines
+  MOL:
+    name: (Former) Ma On Shan Line
+    color: *goldenrod
+  WRL:
+    name: (Former) West Rail Line
+    color: *magenta

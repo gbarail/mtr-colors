@@ -11,24 +11,42 @@ properties:
         $ref: ./color.schema.yaml#/$defs/color
     additionalProperties: false
 
+  map_element_colors:
+    description: Maps map element names to color keys
+    type: object
+    patternProperties:
+      ^.+$:
+        description: Map element
+        type: object
+        properties:
+          name:
+            description: Map element name
+            type: string
+          color:
+            $ref: ./color.schema.yaml#/$defs/color # Recommended: use YAML anchors to reference color names
+        required:
+          - name
+          - color
+        additionalProperties: false
+    additionalProperties: false
+
   lines_colors:
     description: Maps 3-letter abbreviations to color keys
     type: object
     patternProperties:
       ^[A-Z]{3}$:
         description: 3-letter abbreviation
-        # Recommended: use YAML anchors to reference color names
-        $ref: ./color.schema.yaml#/$defs/color
-    additionalProperties: false
-
-  map_element_colors:
-    description: Maps map element names to color keys
-    type: object
-    patternProperties:
-      ^.+$:
-        description: Map element name
-        # Recommended: use YAML anchors to reference color names
-        $ref: ./color.schema.yaml#/$defs/color
+        type: object
+        properties:
+          name:
+            description: Line name
+            type: string
+          color:
+            $ref: ./color.schema.yaml#/$defs/color # Recommended: use YAML anchors to reference color names
+        required:
+          - name
+          - color
+        additionalProperties: false
     additionalProperties: false
 
 additionalProperties: false
