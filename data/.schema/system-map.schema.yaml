@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+
+$schema: https://json-schema.org/draft/2020-12/schema
+properties:
+  color_names:
+    description: Maps color names to RGB values
+    type: object
+    patternProperties:
+      ^[A-Za-z_]+$:
+        description: Color name
+        $ref: ./color.schema.yaml#/$defs/color
+    additionalProperties: false
+
+  lines_colors:
+    description: Colors of MTR lines
+    type: object
+    patternProperties:
+      ^[A-Z]{3}$:
+        description: 3-letter abbreviation
+        type: object
+        properties:
+          name:
+            description: Line name
+            type: string
+          color:
+            $ref: ./color.schema.yaml#/$defs/color # Recommended: use YAML anchors to reference color names
+        required:
+          - name
+          - color
+        additionalProperties: false
+    additionalProperties: false
+
+  miscellaneous_colors:
+    description: Miscellaneous colors on the System Map
+    type: object
+    patternProperties:
+      ^.+$:
+        description: Map element
+        type: object
+        properties:
+          name:
+            description: Map element name
+            type: string
+          color:
+            $ref: ./color.schema.yaml#/$defs/color # Recommended: use YAML anchors to reference color names
+        required:
+          - name
+          - color
+        additionalProperties: false
+    additionalProperties: false
+
+additionalProperties: false

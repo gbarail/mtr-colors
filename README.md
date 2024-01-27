@@ -4,5 +4,5 @@
 
 All data files are listed in the [data](./data/) directory.
 
-- MTR logo: [logo.yml](./data/logo.yml)
-- MTR System Map: [system_map.yml](./data/system_map.yml)
+* [MTR logo](./data/mtr-logo.yaml)
+* [System Map](./data/system-map.yaml)
