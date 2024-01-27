@@ -1,8 +1,12 @@
 package main
 
 import (
+	"os"
 	"path"
 	"runtime"
+
+	"github.com/gbarail/mtr-colors/types"
+	"gopkg.in/yaml.v3"
 )
 
 var (
@@ -14,3 +18,20 @@ var (
 	MTRLogoYAMLFile      = path.Join(dataDir, "mtr-logo.yaml")
 	MTRSystemMapYAMLFile = path.Join(dataDir, "mtr-system-map.yaml")
 )
+
+const GIMPPaletteExtension = "gpl"
+
+func ReadMTRLogoYAMLFile() (types.MTRLogo, error) {
+	bytes, err := os.ReadFile(MTRLogoYAMLFile)
+	if err != nil {
+		return nil, err
+	}
+
+	data := types.MTRLogo{}
+	err = yaml.Unmarshal(bytes, &data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}

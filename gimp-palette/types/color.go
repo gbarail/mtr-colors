@@ -1,4 +1,4 @@
-package main
+package types
 
 type RGBValue uint8
 type RGB [3]RGBValue
