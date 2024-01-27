@@ -8,10 +8,10 @@ patternProperties:
     type: object
     properties:
       name:
-        description: W3C color name
+        description: Color name
         type: string
       pantone:
-        description: Pantone color name
+        description: Pantone color code
         type: string
       rgb:
         description: RGB values
@@ -23,5 +23,6 @@ patternProperties:
         minItems: 3
         maxItems: 3
     required:
+      - name
       - rgb
     additionalProperties: false
