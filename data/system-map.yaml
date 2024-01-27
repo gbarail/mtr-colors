@@ -83,29 +83,6 @@ color_names:
     pantone: 485C
     rgb: [218, 41, 28]
 
-map_element_colors:
-  # Basic elements
-  background:
-    name: Background
-    color: *white
-  text:
-    name: Text
-    color: *black
-  header_background:
-    name: Header background
-    color: *dark_blue
-
-  # Auxiliary colors
-  sea_water:
-    name: Sea water
-    color: *light_blue
-  szl:
-    name: Shenzhen land
-    color: *light_grey
-  szm:
-    name: Shenzhen Metro Network
-    color: *grey
-
 lines_colors:
   # Current lines
   AEL:
@@ -152,3 +129,31 @@ lines_colors:
   WRL:
     name: (Former) West Rail Line
     color: *magenta
+
+miscellaneous_colors:
+  # Basic elements
+  background:
+    name: Background
+    color: *white
+  text:
+    name: Text
+    color: *black
+  header_background:
+    name: Header background
+    color: *dark_blue
+
+  # Nature
+  land:
+    name: Land
+    color: *white
+  sea_water:
+    name: Sea water
+    color: *light_blue
+
+  # Shenzhen Metro
+  szl:
+    name: Shenzhen land
+    color: *light_grey
+  szm:
+    name: Shenzhen Metro Network
+    color: *grey

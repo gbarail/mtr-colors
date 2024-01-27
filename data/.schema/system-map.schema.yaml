@@ -11,16 +11,16 @@ properties:
         $ref: ./color.schema.yaml#/$defs/color
     additionalProperties: false
 
-  map_element_colors:
-    description: Maps map element names to color keys
+  lines_colors:
+    description: Colors of MTR lines
     type: object
     patternProperties:
-      ^.+$:
-        description: Map element
+      ^[A-Z]{3}$:
+        description: 3-letter abbreviation
         type: object
         properties:
           name:
-            description: Map element name
+            description: Line name
             type: string
           color:
             $ref: ./color.schema.yaml#/$defs/color # Recommended: use YAML anchors to reference color names
@@ -30,16 +30,16 @@ properties:
         additionalProperties: false
     additionalProperties: false
 
-  lines_colors:
-    description: Maps 3-letter abbreviations to color keys
+  miscellaneous_colors:
+    description: Miscellaneous colors on the System Map
     type: object
     patternProperties:
-      ^[A-Z]{3}$:
-        description: 3-letter abbreviation
+      ^.+$:
+        description: Map element
         type: object
         properties:
           name:
-            description: Line name
+            description: Map element name
             type: string
           color:
             $ref: ./color.schema.yaml#/$defs/color # Recommended: use YAML anchors to reference color names
