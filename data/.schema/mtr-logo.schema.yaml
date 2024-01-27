@@ -5,24 +5,4 @@ type: object
 patternProperties:
   ^[A-Za-z_]+$:
     description: Color key
-    type: object
-    properties:
-      name:
-        description: Color name
-        type: string
-      pantone:
-        description: Pantone color code
-        type: string
-      rgb:
-        description: RGB values
-        type: array
-        items:
-          type: integer
-          minimum: 0
-          maximum: 255
-        minItems: 3
-        maxItems: 3
-    required:
-      - name
-      - rgb
-    additionalProperties: false
+    $ref: ./color.schema.yaml#/$defs/color
