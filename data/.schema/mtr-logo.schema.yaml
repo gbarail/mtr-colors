@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+
+$schema: https://json-schema.org/draft/2020-12/schema
+type: object
+patternProperties:
+  ^[A-Za-z_]+$:
+    description: Color key
+    type: object
+    properties:
+      name:
+        description: W3C color name
+        type: string
+      pantone:
+        description: Pantone color name
+        type: string
+      rgb:
+        description: RGB values
+        type: array
+        items:
+          type: integer
+          minimum: 0
+          maximum: 255
+        minItems: 3
+        maxItems: 3
+    required:
+      - rgb
+    additionalProperties: false
