@@ -2,30 +2,13 @@
 
 $schema: https://json-schema.org/draft/2020-12/schema
 properties:
-  colors:
-    description: Map color keys to RGB values
+  color_names:
+    description: Maps color names to RGB values
     type: object
     patternProperties:
       ^[A-Za-z_]+$:
-        description: Color key
-        type: object
-        properties:
-          name:
-            description: Color name
-            type: string
-          rgb:
-            description: RGB values
-            type: array
-            items:
-              type: integer
-              minimum: 0
-              maximum: 255
-            minItems: 3
-            maxItems: 3
-        required:
-          - name
-          - rgb
-        additionalProperties: false
+        description: Color name
+        $ref: ./color.schema.yaml#/$defs/color
     additionalProperties: false
 
   lines_colors:
@@ -34,7 +17,8 @@ properties:
     patternProperties:
       ^[A-Z]{3}$:
         description: 3-letter abbreviation
-        type: string
+        # Recommended: use YAML anchors to reference color names
+        $ref: ./color.schema.yaml#/$defs/color
     additionalProperties: false
 
   map_element_colors:
@@ -43,7 +27,8 @@ properties:
     patternProperties:
       ^.+$:
         description: Map element name
-        type: string
+        # Recommended: use YAML anchors to reference color names
+        $ref: ./color.schema.yaml#/$defs/color
     additionalProperties: false
 
 additionalProperties: false
