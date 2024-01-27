@@ -12,5 +12,5 @@ var (
 
 var (
 	MTRLogoYAMLFile      = path.Join(dataDir, "mtr-logo.yaml")
-	MTRSystemMapYAMLFile = path.Join(dataDir, "system-map.yaml")
+	MTRSystemMapYAMLFile = path.Join(dataDir, "mtr-system-map.yaml")
 )
