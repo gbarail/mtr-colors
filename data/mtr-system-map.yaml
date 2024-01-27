@@ -4,7 +4,7 @@
 # Source: https://esearch.ipd.gov.hk/
 # Trade mark number: 303009096
 
-color_names:
+color_names: !!omap
   # Basic colors
   black: &black
     name: black
@@ -83,7 +83,7 @@ color_names:
     pantone: 485C
     rgb: [218, 41, 28]
 
-lines_colors:
+lines_colors: !!omap
   # Current lines
   AEL:
     name: Airport Express
@@ -130,7 +130,7 @@ lines_colors:
     name: (Former) West Rail Line
     color: *magenta
 
-miscellaneous_colors:
+miscellaneous_colors: !!omap
   # Basic elements
   background:
     name: Background
