@@ -28,8 +28,6 @@ func (p GIMPPalette) String() string {
 		// Output category name if it exists
 		if category.Name != "" {
 			data = append(data, fmt.Sprintf("# %s\n", category.Name))
-		} else {
-			data = append(data, "\n")
 		}
 
 		// Output colors
