@@ -17,7 +17,7 @@ func main() {
 			panic(err)
 		}
 
-		category := GenerateMTRLogoCategory(data)
+		category := types.GenerateMTRLogoCategory(data)
 		palette.Categories = append(palette.Categories, &category)
 	}
 

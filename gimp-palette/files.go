@@ -26,19 +26,3 @@ func ReadMTRLogoYAMLFile() (types.MTRLogoData, error) {
 	}
 	return *data, nil
 }
-
-func GenerateMTRLogoCategory(data types.MTRLogoData) types.Category {
-	category := types.Category{
-		Name:   "MTR logo",
-		Colors: []*types.Color{},
-	}
-
-	for _, v := range data {
-		category.Colors = append(category.Colors, &types.Color{
-			Name: v.Name,
-			RGB:  v.RGB,
-		})
-	}
-
-	return category
-}
