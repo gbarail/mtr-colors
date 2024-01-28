@@ -26,10 +26,10 @@ func (c GIMPPaletteCategory) String() string {
 
 		bytes = fmt.Appendf(bytes, "%3d %3d %3d", rgb[0], rgb[1], rgb[2])
 		if color.Name != "" {
-			bytes = fmt.Appendf(bytes, " # %s", color.Name)
+			bytes = fmt.Append(bytes, " ", color.Name)
 		}
 		if i < len(c.Colors)-1 {
-			bytes = fmt.Appendf(bytes, "\n")
+			bytes = fmt.Append(bytes, "\n")
 		}
 	}
 
