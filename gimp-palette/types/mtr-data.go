@@ -2,8 +2,8 @@ package types
 
 type MTRLogoData map[string]*Color
 
-func GenerateMTRLogoCategory(data MTRLogoData) Category {
-	category := Category{
+func GenerateMTRLogoCategory(data MTRLogoData) GIMPPaletteCategory {
+	category := GIMPPaletteCategory{
 		Name:   "MTR logo",
 		Colors: []*Color{},
 	}

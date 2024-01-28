@@ -5,14 +5,14 @@ import (
 	"strings"
 )
 
-type Category struct {
+type GIMPPaletteCategory struct {
 	Name   string
 	Colors []*Color
 }
 
 type GIMPPalette struct {
 	Name       string
-	Categories []*Category
+	Categories []*GIMPPaletteCategory
 }
 
 const GIMPPaletteTop = "GIMP Palette"
