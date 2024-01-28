@@ -11,24 +11,15 @@ func main() {
 		Name: "Hong Kong MTR colors",
 	}
 
-	data, err := ReadMTRLogoYAMLFile()
-	if err != nil {
-		panic(err)
-	}
+	{ // Generate MTR Logo category
+		data, err := ReadMTRLogoYAMLFile()
+		if err != nil {
+			panic(err)
+		}
 
-	category := types.Category{
-		Name:   "MTR logo",
-		Colors: []*types.Color{},
+		category := GenerateMTRLogoCategory(data)
+		palette.Categories = append(palette.Categories, &category)
 	}
-
-	for _, v := range data {
-		category.Colors = append(category.Colors, &types.Color{
-			Name: v.Name,
-			RGB:  v.RGB,
-		})
-	}
-
-	palette.Categories = append(palette.Categories, &category)
 
 	fmt.Printf("%v\n", palette)
 }

@@ -1,3 +1,3 @@
 package types
 
-type MTRLogo map[string]*Color
+type MTRLogoData map[string]*Color

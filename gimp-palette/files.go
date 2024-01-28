@@ -21,17 +21,33 @@ var (
 
 const GIMPPaletteExtension = "gpl"
 
-func ReadMTRLogoYAMLFile() (types.MTRLogo, error) {
+func ReadMTRLogoYAMLFile() (types.MTRLogoData, error) {
 	bytes, err := os.ReadFile(MTRLogoYAMLFile)
 	if err != nil {
 		return nil, err
 	}
 
-	data := types.MTRLogo{}
+	data := types.MTRLogoData{}
 	err = yaml.Unmarshal(bytes, &data)
 	if err != nil {
 		return nil, err
 	}
 
 	return data, nil
+}
+
+func GenerateMTRLogoCategory(data types.MTRLogoData) types.Category {
+	category := types.Category{
+		Name:   "MTR logo",
+		Colors: []*types.Color{},
+	}
+
+	for _, v := range data {
+		category.Colors = append(category.Colors, &types.Color{
+			Name: v.Name,
+			RGB:  v.RGB,
+		})
+	}
+
+	return category
 }
