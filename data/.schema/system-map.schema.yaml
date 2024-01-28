@@ -19,13 +19,13 @@ properties:
         description: 3-letter abbreviation
         type: object
         properties:
-          name:
+          full_name:
             description: Line name
             type: string
           color:
             $ref: ./color.schema.yaml#/$defs/color # Recommended: use YAML anchors to reference color names
         required:
-          - name
+          - full_name
           - color
         additionalProperties: false
     additionalProperties: false
