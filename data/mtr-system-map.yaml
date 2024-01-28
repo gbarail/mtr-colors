@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=./.schema/system-map.schema.yaml
+# yaml-language-server: $schema=./.schema/mtr-system-map.schema.yaml
 
 # MTR System Map colors
 # Source: https://esearch.ipd.gov.hk/
