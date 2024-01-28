@@ -2,6 +2,8 @@ package types
 
 import (
 	"fmt"
+
+	"golang.org/x/exp/slices"
 )
 
 type GIMPPaletteCategory struct {
@@ -22,8 +24,10 @@ func (c GIMPPaletteCategory) String() string {
 		bytes = fmt.Appendf(bytes, "# %s\n", c.Name)
 	}
 
-	// Write colors, one on each line
-	for i, color := range c.Colors {
+	// Write colors, one on each line, sorted by color names
+	colors := slices.Clone(c.Colors)
+	slices.SortFunc(colors, ColorCompare)
+	for i, color := range colors {
 		rgb := color.RGB
 
 		bytes = fmt.Appendf(bytes, "%3d %3d %3d", rgb[0], rgb[1], rgb[2])
