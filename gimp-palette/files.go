@@ -17,7 +17,7 @@ var (
 	MTRSystemMapYAMLFile = path.Join(dataDir, "mtr-system-map.yaml")
 )
 
-const GIMPPaletteExtension = "gpl"
+const GIMPPaletteExtension = ".gpl"
 
 func ReadMTRLogoYAMLFile() (types.MTRLogoData, error) {
 	data, err := ReadAndUnmarshalYAML[types.MTRLogoData](MTRLogoYAMLFile)

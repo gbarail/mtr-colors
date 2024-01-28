@@ -1,12 +1,20 @@
 package main
 
 import (
-	"fmt"
+	"os"
+	"path"
+	"runtime"
+	"strings"
 
 	"github.com/gbarail/mtr-colors/types"
 )
 
-func main() {
+var (
+	_, filename, _, _ = runtime.Caller(0)
+	outputPath        = path.Join(path.Dir(filename), "output", "mtr-colors.gpl")
+)
+
+func generatePalette() types.GIMPPalette {
 	palette := types.GIMPPalette{
 		Name: "Hong Kong MTR colors",
 	}
@@ -31,5 +39,30 @@ func main() {
 		palette.Categories = append(palette.Categories, categories...)
 	}
 
-	fmt.Println(palette)
+	return palette
+}
+
+func writePaletteToFile(palette *types.GIMPPalette, filePath string) error {
+	if !strings.HasSuffix(filePath, GIMPPaletteExtension) {
+		filePath += GIMPPaletteExtension
+	}
+
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+
+	defer file.Close()
+
+	_, err = file.WriteString(palette.String())
+	if err != nil {
+		return err
+	}
+
+	return err
+}
+
+func main() {
+	palette := generatePalette()
+	writePaletteToFile(&palette, outputPath)
 }
