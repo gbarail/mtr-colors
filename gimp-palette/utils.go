@@ -7,7 +7,7 @@ import (
 )
 
 func ReadAndUnmarshalYAML[T interface{}](filePath string) (*T, error) {
-	bytes, err := os.ReadFile(MTRLogoYAMLFile)
+	bytes, err := os.ReadFile(filePath)
 	if err != nil {
 		return nil, err
 	}
