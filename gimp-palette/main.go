@@ -21,9 +21,9 @@ func main() {
 		Colors: []*types.Color{},
 	}
 
-	for k, v := range data {
+	for _, v := range data {
 		category.Colors = append(category.Colors, &types.Color{
-			Name: k,
+			Name: v.Name,
 			RGB:  v.RGB,
 		})
 	}
