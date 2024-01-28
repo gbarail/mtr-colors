@@ -15,8 +15,7 @@ type MTRSystemMapData struct {
 
 func GenerateMTRLogoCategory(data MTRLogoData) GIMPPaletteCategory {
 	category := GIMPPaletteCategory{
-		Name:   "MTR logo",
-		Colors: []*Color{},
+		Name: "MTR logo",
 	}
 
 	for _, v := range data {
@@ -30,12 +29,11 @@ func GenerateMTRLogoCategory(data MTRLogoData) GIMPPaletteCategory {
 }
 
 func GenerateMTRSystemMapCategories(data *MTRSystemMapData) []*GIMPPaletteCategory {
-	categories := []*GIMPPaletteCategory{}
+	var categories []*GIMPPaletteCategory
 
 	{ // lines colors
 		category := &GIMPPaletteCategory{
-			Name:   "Lines colors",
-			Colors: []*Color{},
+			Name: "Lines colors",
 		}
 
 		for _, v := range data.LinesColors {
@@ -47,8 +45,7 @@ func GenerateMTRSystemMapCategories(data *MTRSystemMapData) []*GIMPPaletteCatego
 
 	{ // miscellaneous colors
 		category := &GIMPPaletteCategory{
-			Name:   "Miscellaneous colors",
-			Colors: []*Color{},
+			Name: "Miscellaneous colors",
 		}
 
 		for _, v := range data.MiscellaneousColors {
