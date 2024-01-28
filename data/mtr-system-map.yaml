@@ -86,48 +86,48 @@ color_names:
 lines_colors:
   # Current lines
   AEL:
-    name: Airport Express
+    full_name: Airport Express
     color: *dark_green
   DRL:
-    name: Disneyland Resort Line
+    full_name: Disneyland Resort Line
     color: *pink
   EAL:
-    name: East Rail Line
+    full_name: East Rail Line
     color: *blue
   HSR:
-    name: High Speed Rail
+    full_name: High Speed Rail
     color: *dark_grey
   ISL:
-    name: Island Line
+    full_name: Island Line
     color: *ocean_blue
   KTL:
-    name: Kwun Tong Line
+    full_name: Kwun Tong Line
     color: *green
   LRT:
-    name: Light Rail
+    full_name: Light Rail
     color: *gold
   SIL:
-    name: South Island Line
+    full_name: South Island Line
     color: *light_green
   TCL:
-    name: Tung Chung Line
+    full_name: Tung Chung Line
     color: *orange
   TKL:
-    name: Tseung Kwan O Line
+    full_name: Tseung Kwan O Line
     color: *purple
   TML:
-    name: Tuen Ma Line
+    full_name: Tuen Ma Line
     color: *goldenrod
   TWL:
-    name: Tswen Wan Line
+    full_name: Tswen Wan Line
     color: *red
 
   # Former lines
   MOL:
-    name: (Former) Ma On Shan Line
+    full_name: (Former) Ma On Shan Line
     color: *goldenrod
   WRL:
-    name: (Former) West Rail Line
+    full_name: (Former) West Rail Line
     color: *magenta
 
 miscellaneous_colors:
