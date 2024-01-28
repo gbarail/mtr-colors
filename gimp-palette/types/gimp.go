@@ -15,6 +15,30 @@ type GIMPPalette struct {
 	Categories []*GIMPPaletteCategory
 }
 
+func (c GIMPPaletteCategory) String() string {
+	bytes := []byte{}
+
+	// Write category name at the top, if it exists
+	if c.Name != "" {
+		bytes = fmt.Appendf(bytes, "# %s\n", c.Name)
+	}
+
+	// Write colors, one on each line
+	for i, color := range c.Colors {
+		rgb := color.RGB
+
+		bytes = fmt.Appendf(bytes, "%3d %3d %3d", rgb[0], rgb[1], rgb[2])
+		if color.Name != "" {
+			bytes = fmt.Appendf(bytes, " # %s", color.Name)
+		}
+		if i < len(c.Colors)-1 {
+			bytes = fmt.Appendf(bytes, "\n")
+		}
+	}
+
+	return string(bytes)
+}
+
 func (p GIMPPalette) String() string {
 	data := []string{}
 
@@ -24,26 +48,7 @@ func (p GIMPPalette) String() string {
 
 	for _, category := range p.Categories {
 		data = append(data, "\n\n")
-
-		// Output category name if it exists
-		if category.Name != "" {
-			data = append(data, fmt.Sprintf("# %s\n", category.Name))
-		}
-
-		// Output colors
-		lines := []string{}
-		for _, color := range category.Colors {
-			RGB := color.RGB
-
-			end := ""
-			if color.Name != "" {
-				end = fmt.Sprintf(" # %s", color.Name)
-			}
-
-			line := fmt.Sprintf("%3d %3d %3d%s", RGB[0], RGB[1], RGB[2], end)
-			lines = append(lines, line)
-		}
-		data = append(data, strings.Join(lines, "\n"))
+		data = append(data, category.String())
 	}
 
 	return strings.Join(data, "")
