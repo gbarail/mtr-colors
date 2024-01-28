@@ -16,7 +16,7 @@ type GIMPPalette struct {
 }
 
 func (p GIMPPalette) String() string {
-	data := make([]string, 256)
+	data := []string{}
 
 	// Output top
 	top := fmt.Sprintf("GIMP Palette\nName: %s\n", p.Name)
