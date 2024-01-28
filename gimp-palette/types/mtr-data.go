@@ -13,8 +13,8 @@ type MTRSystemMapData struct {
 	} `yaml:"miscellaneous_colors"`
 }
 
-func GenerateMTRLogoCategory(data MTRLogoData) GIMPPaletteCategory {
-	category := GIMPPaletteCategory{
+func GenerateMTRLogoCategory(data MTRLogoData) *GIMPPaletteCategory {
+	category := &GIMPPaletteCategory{
 		Name: "MTR logo",
 	}
 

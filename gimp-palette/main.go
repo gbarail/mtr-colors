@@ -18,7 +18,7 @@ func main() {
 		}
 
 		category := types.GenerateMTRLogoCategory(data)
-		palette.Categories = append(palette.Categories, &category)
+		palette.Categories = append(palette.Categories, category)
 	}
 
 	{ // Generate MTR System Map categories
