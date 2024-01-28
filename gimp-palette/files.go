@@ -1,12 +1,10 @@
 package main
 
 import (
-	"os"
 	"path"
 	"runtime"
 
 	"github.com/gbarail/mtr-colors/types"
-	"gopkg.in/yaml.v3"
 )
 
 var (
@@ -22,18 +20,11 @@ var (
 const GIMPPaletteExtension = "gpl"
 
 func ReadMTRLogoYAMLFile() (types.MTRLogoData, error) {
-	bytes, err := os.ReadFile(MTRLogoYAMLFile)
+	data, err := ReadAndUnmarshalYAML[types.MTRLogoData](MTRLogoYAMLFile)
 	if err != nil {
 		return nil, err
 	}
-
-	data := types.MTRLogoData{}
-	err = yaml.Unmarshal(bytes, &data)
-	if err != nil {
-		return nil, err
-	}
-
-	return data, nil
+	return *data, nil
 }
 
 func GenerateMTRLogoCategory(data types.MTRLogoData) types.Category {
