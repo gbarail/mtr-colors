@@ -1,5 +1,7 @@
 package types
 
+import "slices"
+
 type MTRLogoData map[string]*Color
 
 type MTRSystemMapData struct {
@@ -21,6 +23,7 @@ func GenerateMTRLogoCategory(data MTRLogoData) *GIMPPaletteCategory {
 	for _, v := range data {
 		category.Colors = append(category.Colors, v)
 	}
+	slices.SortFunc(category.Colors, CompareColors)
 
 	return category
 }
@@ -39,6 +42,7 @@ func GenerateMTRSystemMapCategories(data *MTRSystemMapData) []*GIMPPaletteCatego
 				RGB:  v.Color.RGB,
 			})
 		}
+		slices.SortFunc(category.Colors, CompareColors)
 
 		categories = append(categories, category)
 	}
@@ -54,6 +58,7 @@ func GenerateMTRSystemMapCategories(data *MTRSystemMapData) []*GIMPPaletteCatego
 				RGB:  v.Color.RGB,
 			})
 		}
+		slices.SortFunc(category.Colors, CompareColors)
 
 		categories = append(categories, category)
 	}
