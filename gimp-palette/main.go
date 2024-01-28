@@ -1,8 +1,10 @@
 package main
 
 import (
+	"log"
 	"os"
 	"path"
+	"path/filepath"
 	"runtime"
 	"strings"
 
@@ -42,27 +44,41 @@ func generatePalette() types.GIMPPalette {
 	return palette
 }
 
-func writePaletteToFile(palette *types.GIMPPalette, filePath string) error {
+// Write palette to file.
+// Returns two values:
+// * In case of error, return the empty file path, and error.
+// * In case of success, return the actual absolute file path, and nil error.
+func writePaletteToFile(palette *types.GIMPPalette, filePath string) (string, error) {
 	if !strings.HasSuffix(filePath, GIMPPaletteExtension) {
 		filePath += GIMPPaletteExtension
+	}
+	filePath, err := filepath.Abs(filePath)
+	if err != nil {
+		return "", err
 	}
 
 	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	defer file.Close()
 
 	_, err = file.WriteString(palette.String())
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	return err
+	return filePath, nil
 }
 
 func main() {
 	palette := generatePalette()
-	writePaletteToFile(&palette, outputPath)
+
+	outputPath, err := writePaletteToFile(&palette, outputPath)
+	if err != nil {
+		panic(err)
+	}
+
+	log.Printf("Written palette to \"%s\".\n", outputPath)
 }
