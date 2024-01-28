@@ -2,7 +2,6 @@ package types
 
 import (
 	"fmt"
-	"strings"
 )
 
 type GIMPPaletteCategory struct {
@@ -40,16 +39,15 @@ func (c GIMPPaletteCategory) String() string {
 }
 
 func (p GIMPPalette) String() string {
-	data := []string{}
+	bytes := []byte{}
 
-	// Output top
-	top := fmt.Sprintf("GIMP Palette\nName: %s", p.Name)
-	data = append(data, top)
+	// Write top
+	bytes = fmt.Appendf(bytes, "GIMP Palette\nName: %s", p.Name)
 
+	// Write each category
 	for _, category := range p.Categories {
-		data = append(data, "\n\n")
-		data = append(data, category.String())
+		bytes = fmt.Append(bytes, "\n\n", category)
 	}
 
-	return strings.Join(data, "")
+	return string(bytes)
 }
