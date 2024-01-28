@@ -26,3 +26,11 @@ func ReadMTRLogoYAMLFile() (types.MTRLogoData, error) {
 	}
 	return *data, nil
 }
+
+func ReadMTRSystemMapYAMLFile() (*types.MTRSystemMapData, error) {
+	data, err := ReadAndUnmarshalYAML[types.MTRSystemMapData](MTRSystemMapYAMLFile)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
