@@ -13,6 +13,7 @@ var (
 	testFilesDir      = path.Join(path.Dir(currFile), "..", "tests")
 
 	gimpPaletteCategoriesTestDir = path.Join(testFilesDir, "gimp-palette-categories")
+	gimpPalettesTestDir          = path.Join(testFilesDir, "gimp-palettes")
 )
 
 func readFile(t *testing.T, filePath string) string {
@@ -97,6 +98,125 @@ func TestGIMPPaletteCategory_String(t *testing.T) {
 	for _, td := range testData {
 		expectedOutput := readFile(t, getTestFilePath(td.expectedOutputFile))
 		if actual := td.category.String(); actual != expectedOutput {
+			t.Errorf("Expected \"%s\", got \"%s\"", expectedOutput, actual)
+		}
+	}
+}
+
+func TestGIMPPalette_String(t *testing.T) {
+	type TestData struct {
+		palette            GIMPPalette
+		expectedOutputFile string
+	}
+
+	getTestFilePath := func(filename string) string {
+		return path.Join(gimpPalettesTestDir, filename)
+	}
+
+	testData := []TestData{
+		{ // empty palette
+			palette:            GIMPPalette{Name: "Empty Palette"},
+			expectedOutputFile: "empty-palette.gpl",
+		},
+		{ // palette with one category, no category name
+			palette: GIMPPalette{
+				Name: "One category, no category name",
+				Categories: []*GIMPPaletteCategory{
+					{
+						Colors: []*Color{
+							{
+								Name: "Black",
+								RGB:  RGB{0, 0, 0},
+							},
+							{
+								Name: "White",
+								RGB:  RGB{255, 255, 255},
+							},
+						},
+					},
+				},
+			},
+			expectedOutputFile: "one-category-no-category-name.gpl",
+		},
+		{ // palette with two categories, no category names
+			palette: GIMPPalette{
+				Name: "Two categories, no category names",
+				Categories: []*GIMPPaletteCategory{
+					{
+						Colors: []*Color{
+							{
+								Name: "Black",
+								RGB:  RGB{0, 0, 0},
+							},
+							{
+								Name: "White",
+								RGB:  RGB{255, 255, 255},
+							},
+						},
+					},
+					{
+						Colors: []*Color{
+							{
+								Name: "Red",
+								RGB:  RGB{255, 0, 0},
+							},
+							{
+								Name: "Green",
+								RGB:  RGB{0, 255, 0},
+							},
+							{
+								Name: "Blue",
+								RGB:  RGB{0, 0, 255},
+							},
+						},
+					},
+				},
+			},
+			expectedOutputFile: "two-categories-no-category-names.gpl",
+		},
+		{ // palette with two categories, with category names
+			palette: GIMPPalette{
+				Name: "Two categories, with category names",
+				Categories: []*GIMPPaletteCategory{
+					{
+						Name: "Black and White",
+						Colors: []*Color{
+							{
+								Name: "Black",
+								RGB:  RGB{0, 0, 0},
+							},
+							{
+								Name: "White",
+								RGB:  RGB{255, 255, 255},
+							},
+						},
+					},
+					{
+						Name: "Red, Green, and Blue",
+						Colors: []*Color{
+							{
+								Name: "Red",
+								RGB:  RGB{255, 0, 0},
+							},
+							{
+								Name: "Green",
+								RGB:  RGB{0, 255, 0},
+							},
+							{
+								Name: "Blue",
+								RGB:  RGB{0, 0, 255},
+							},
+						},
+					},
+				},
+			},
+			expectedOutputFile: "two-categories-with-category-names.gpl",
+		},
+	}
+
+	for _, td := range testData {
+		expectedOutput := readFile(t, getTestFilePath(td.expectedOutputFile))
+		if actual := td.palette.String(); actual != expectedOutput {
 			t.Errorf("Expected \"%s\", got \"%s\"", expectedOutput, actual)
 		}
 	}
