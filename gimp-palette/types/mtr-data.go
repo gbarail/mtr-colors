@@ -5,14 +5,18 @@ import "slices"
 type MTRLogoData map[string]*Color
 
 type MTRSystemMapData struct {
-	LinesColors map[string]*struct {
-		FullName string `yaml:"full_name"`
-		Color    *Color
-	} `yaml:"lines_colors"`
-	MiscellaneousColors map[string]*struct {
-		Name  string
-		Color *Color
-	} `yaml:"miscellaneous_colors"`
+	LinesColors         map[string]*LineColor `yaml:"lines_colors"`
+	MiscellaneousColors map[string]*MiscellaneousColor
+}
+
+type LineColor struct {
+	FullName string `yaml:"full_name"`
+	Color    *Color
+}
+
+type MiscellaneousColor struct {
+	Name  string
+	Color *Color
 }
 
 func GenerateMTRLogoCategory(data MTRLogoData) *GIMPPaletteCategory {
