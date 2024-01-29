@@ -6,15 +6,15 @@ import (
 
 func TestGenerateMTRLogoCategory(t *testing.T) {
 	testData := MTRLogoData{
-		"red": &Color{
+		"red": {
 			Name: "red",
 			RGB:  RGB{255, 0, 0},
 		},
-		"green": &Color{
+		"green": {
 			Name: "green",
 			RGB:  RGB{0, 255, 0},
 		},
-		"blue": &Color{
+		"blue": {
 			Name: "blue",
 			RGB:  RGB{0, 0, 255},
 		},
