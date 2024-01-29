@@ -17,7 +17,10 @@ func (c GIMPPaletteCategory) String() string {
 
 	// Write category name at the top, if it exists
 	if c.Name != "" {
-		bytes = fmt.Appendf(bytes, "# %s\n", c.Name)
+		bytes = fmt.Appendf(bytes, "# %s", c.Name)
+		if len(c.Colors) > 0 {
+			bytes = fmt.Append(bytes, "\n")
+		}
 	}
 
 	// Write colors, one on each line
