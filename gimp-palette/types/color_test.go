@@ -1,6 +1,10 @@
 package types
 
-import "testing"
+import (
+	"testing"
+
+	"gotest.tools/v3/assert"
+)
 
 func TestCompareColors(t *testing.T) {
 	type TestData struct {
@@ -37,10 +41,7 @@ func TestCompareColors(t *testing.T) {
 	}
 
 	for _, td := range testData {
-		if c := CompareColors(&td.c1, &td.c2); c != td.expected {
-			t.Errorf("CompareColors(%v, %v) = %v, expected %v",
-				td.c1, td.c2, c, td.expected)
-		}
+		assert.Equal(t, CompareColors(&td.c1, &td.c2), td.expected)
 	}
 }
 
@@ -74,10 +75,7 @@ func TestCompareColorNames(t *testing.T) {
 	}
 
 	for _, td := range testData {
-		if c := compareColorNames(&td.c1, &td.c2); c != td.expected {
-			t.Errorf("compareColorNames(%v, %v) = %v, expected %v",
-				td.c1, td.c2, c, td.expected)
-		}
+		assert.Equal(t, compareColorNames(&td.c1, &td.c2), td.expected)
 	}
 }
 
@@ -126,41 +124,35 @@ func TestCompareRGB(t *testing.T) {
 	}
 
 	for _, td := range testData {
-		if c := compareRGB(&td.v1, &td.v2); c != td.expected {
-			t.Errorf("compareRGB(%v, %v) = %v, expected %v",
-				td.v1, td.v2, c, td.expected)
-		}
+		assert.Equal(t, compareRGB(&td.v1, &td.v2), td.expected)
 	}
 }
 
 func TestCompareRGBValues(t *testing.T) {
 	type TestData struct {
-		v1, v2   RGBValue
-		expected int
+		rgb1, rgb2 RGBValue
+		expected   int
 	}
 
 	testData := []TestData{
 		{ // greater than
-			v1:       14,
-			v2:       2,
+			rgb1:     14,
+			rgb2:     2,
 			expected: 1,
 		},
 		{ // less than
-			v1:       2,
-			v2:       14,
+			rgb1:     2,
+			rgb2:     14,
 			expected: -1,
 		},
 		{ // equal
-			v1:       10,
-			v2:       10,
+			rgb1:     10,
+			rgb2:     10,
 			expected: 0,
 		},
 	}
 
 	for _, td := range testData {
-		if c := compareRGBValues(td.v1, td.v2); c != td.expected {
-			t.Errorf("compareRGBValues(%v, %v) = %v, expected %v",
-				td.v1, td.v2, c, td.expected)
-		}
+		assert.Equal(t, compareRGBValues(td.rgb1, td.rgb2), td.expected)
 	}
 }
