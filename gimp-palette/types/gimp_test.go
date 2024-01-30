@@ -10,10 +10,10 @@ import (
 
 var (
 	_, currFile, _, _ = runtime.Caller(0)
-	testFilesDir      = path.Join(path.Dir(currFile), "..", "tests")
+	goldenFilesDir    = path.Join(path.Dir(currFile), "..", "tests", "golden")
 
-	gimpPaletteCategoriesTestDir = path.Join(testFilesDir, "gimp-palette-categories")
-	gimpPalettesTestDir          = path.Join(testFilesDir, "gimp-palettes")
+	gimpPaletteCategoriesTestDir = path.Join(goldenFilesDir, "gimp-palette-categories")
+	gimpPalettesTestDir          = path.Join(goldenFilesDir, "gimp-palettes")
 )
 
 func readFile(t *testing.T, filePath string) string {
@@ -33,22 +33,22 @@ func readFile(t *testing.T, filePath string) string {
 
 func TestGIMPPaletteCategory_String(t *testing.T) {
 	type TestData struct {
-		category           GIMPPaletteCategory
-		expectedOutputFile string
+		category       GIMPPaletteCategory
+		goldenFilePath string
 	}
 
-	getTestFilePath := func(filename string) string {
+	getGoldenFilePath := func(filename string) string {
 		return path.Join(gimpPaletteCategoriesTestDir, filename)
 	}
 
 	testData := []TestData{
 		{ // empty category
-			category:           GIMPPaletteCategory{},
-			expectedOutputFile: "empty-category.txt",
+			category:       GIMPPaletteCategory{},
+			goldenFilePath: "empty-category.txt",
 		},
 		{ // category with only name, no colors
-			category:           GIMPPaletteCategory{Name: "No colors"},
-			expectedOutputFile: "category-with-name-and-no-colors.txt",
+			category:       GIMPPaletteCategory{Name: "No colors"},
+			goldenFilePath: "category-with-name-and-no-colors.txt",
 		},
 		{ // category with no name, and colors
 			category: GIMPPaletteCategory{
@@ -63,7 +63,7 @@ func TestGIMPPaletteCategory_String(t *testing.T) {
 					},
 				},
 			},
-			expectedOutputFile: "category-with-no-name-and-colors.txt",
+			goldenFilePath: "category-with-no-name-and-colors.txt",
 		},
 		{ // category with name and colors
 			category: GIMPPaletteCategory{
@@ -91,32 +91,32 @@ func TestGIMPPaletteCategory_String(t *testing.T) {
 					},
 				},
 			},
-			expectedOutputFile: "category-with-name-and-colors.txt",
+			goldenFilePath: "category-with-name-and-colors.txt",
 		},
 	}
 
 	for _, td := range testData {
-		expectedOutput := readFile(t, getTestFilePath(td.expectedOutputFile))
-		if actual := td.category.String(); actual != expectedOutput {
-			t.Errorf("Expected \"%s\", got \"%s\"", expectedOutput, actual)
+		goldenOutput := readFile(t, getGoldenFilePath(td.goldenFilePath))
+		if actual := td.category.String(); actual != goldenOutput {
+			t.Errorf("Expected golden output \"%s\", got \"%s\"", goldenOutput, actual)
 		}
 	}
 }
 
 func TestGIMPPalette_String(t *testing.T) {
 	type TestData struct {
-		palette            GIMPPalette
-		expectedOutputFile string
+		palette        GIMPPalette
+		goldenFilePath string
 	}
 
-	getTestFilePath := func(filename string) string {
+	getGoldenFilePath := func(filename string) string {
 		return path.Join(gimpPalettesTestDir, filename)
 	}
 
 	testData := []TestData{
 		{ // empty palette
-			palette:            GIMPPalette{Name: "Empty Palette"},
-			expectedOutputFile: "empty-palette.gpl",
+			palette:        GIMPPalette{Name: "Empty Palette"},
+			goldenFilePath: "empty-palette.gpl",
 		},
 		{ // palette with one category, no category name
 			palette: GIMPPalette{
@@ -136,7 +136,7 @@ func TestGIMPPalette_String(t *testing.T) {
 					},
 				},
 			},
-			expectedOutputFile: "one-category-no-category-name.gpl",
+			goldenFilePath: "one-category-no-category-name.gpl",
 		},
 		{ // palette with two categories, no category names
 			palette: GIMPPalette{
@@ -172,7 +172,7 @@ func TestGIMPPalette_String(t *testing.T) {
 					},
 				},
 			},
-			expectedOutputFile: "two-categories-no-category-names.gpl",
+			goldenFilePath: "two-categories-no-category-names.gpl",
 		},
 		{ // palette with two categories, with category names
 			palette: GIMPPalette{
@@ -210,14 +210,14 @@ func TestGIMPPalette_String(t *testing.T) {
 					},
 				},
 			},
-			expectedOutputFile: "two-categories-with-category-names.gpl",
+			goldenFilePath: "two-categories-with-category-names.gpl",
 		},
 	}
 
 	for _, td := range testData {
-		expectedOutput := readFile(t, getTestFilePath(td.expectedOutputFile))
-		if actual := td.palette.String(); actual != expectedOutput {
-			t.Errorf("Expected \"%s\", got \"%s\"", expectedOutput, actual)
+		goldenOutput := readFile(t, getGoldenFilePath(td.goldenFilePath))
+		if actual := td.palette.String(); actual != goldenOutput {
+			t.Errorf("Expected golden output \"%s\", got \"%s\"", goldenOutput, actual)
 		}
 	}
 }
