@@ -87,7 +87,7 @@ func TestGenerateMTRSystemMapCategories(t *testing.T) {
 
 	expectedCategories := []*GIMPPaletteCategory{
 		{
-			Name: "Lines colors",
+			Name: LinesColorsCategoryName,
 			Colors: []*Color{ // sorted by names
 				{
 					Name: "Blue",
@@ -104,7 +104,7 @@ func TestGenerateMTRSystemMapCategories(t *testing.T) {
 			},
 		},
 		{
-			Name: "Miscellaneous colors",
+			Name: MiscellaneousColorsCategoryName,
 			Colors: []*Color{ // sorted by names
 				{
 					Name: "Background",
@@ -118,33 +118,5 @@ func TestGenerateMTRSystemMapCategories(t *testing.T) {
 		},
 	}
 
-	checkCategories := func(actual, expected *GIMPPaletteCategory) {
-		if actual.Name != expected.Name {
-			t.Errorf("Expected category name to be \"%s\", got \"%s\"",
-				expected.Name, actual.Name)
-		}
-		if len(actual.Colors) != len(expected.Colors) {
-			t.Errorf("Expected %d colors, got %d colors",
-				len(expected.Colors), len(actual.Colors))
-		}
-
-		for i, color := range actual.Colors {
-			if *color != *expected.Colors[i] {
-				t.Errorf("Expected color %d to be %v, got %v",
-					i, expected.Colors[i], color)
-			}
-		}
-	}
-
-	{ // check number of categories
-		if len(categories) != len(expectedCategories) {
-			t.Errorf("Expected %d categories, got %d categories",
-				len(expectedCategories), len(categories))
-		}
-	} // check each category
-	{
-		for i, category := range categories {
-			checkCategories(category, expectedCategories[i])
-		}
-	}
+	assert.DeepEqual(t, categories, expectedCategories)
 }
