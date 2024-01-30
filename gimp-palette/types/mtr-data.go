@@ -19,9 +19,16 @@ type MiscellaneousColor struct {
 	Color *Color
 }
 
+const (
+	MTRLogoCategoryName = "MTR logo"
+
+	LinesColorsCategoryName         = "Lines colors"
+	MiscellaneousColorsCategoryName = "Miscellaneous colors"
+)
+
 func GenerateMTRLogoCategory(data MTRLogoData) *GIMPPaletteCategory {
 	category := &GIMPPaletteCategory{
-		Name: "MTR logo",
+		Name: MTRLogoCategoryName,
 	}
 
 	for _, v := range data {
@@ -37,7 +44,7 @@ func GenerateMTRSystemMapCategories(data *MTRSystemMapData) []*GIMPPaletteCatego
 
 	{ // lines colors
 		category := &GIMPPaletteCategory{
-			Name: "Lines colors",
+			Name: LinesColorsCategoryName,
 		}
 
 		for _, v := range data.LinesColors {
@@ -53,7 +60,7 @@ func GenerateMTRSystemMapCategories(data *MTRSystemMapData) []*GIMPPaletteCatego
 
 	{ // miscellaneous colors
 		category := &GIMPPaletteCategory{
-			Name: "Miscellaneous colors",
+			Name: MiscellaneousColorsCategoryName,
 		}
 
 		for _, v := range data.MiscellaneousColors {
