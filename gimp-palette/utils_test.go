@@ -4,6 +4,8 @@ import (
 	"path"
 	"runtime"
 	"testing"
+
+	"gotest.tools/v3/assert"
 )
 
 var (
@@ -14,26 +16,19 @@ var (
 )
 
 func TestReadAndUnmarshalYAML(t *testing.T) {
-	// test invalid YAML path
-	func() {
+	{ // test invalid YAML path
 		_, err := ReadAndUnmarshalYAML[interface{}]("/")
-		if err == nil {
-			t.Errorf("Should have returned an error because the YAML file path is invalid")
-		}
-	}()
+		assert.Assert(t, err != nil)
+	}
 
-	// test invalid YAML file
-	func() {
+	{ // test invalid YAML file
 		yamlFile := path.Join(yamlFilesDir, "invalid.yaml")
 
 		_, err := ReadAndUnmarshalYAML[interface{}](yamlFile)
-		if err == nil {
-			t.Errorf("Should have returned an error because the YAML file is invalid")
-		}
-	}()
+		assert.Assert(t, err != nil)
+	}
 
-	// test custom data structure
-	func() {
+	{ // test custom data structure
 		yamlFile := path.Join(yamlFilesDir, "a.yaml")
 
 		type A struct {
@@ -50,12 +45,7 @@ func TestReadAndUnmarshalYAML(t *testing.T) {
 
 		var a *A
 		a, err := ReadAndUnmarshalYAML[A](yamlFile)
-		if err != nil {
-			t.Error(err)
-			return
-		}
-		if *a != expected {
-			t.Errorf("expected %v, got %v", expected, *a)
-		}
-	}()
+		assert.NilError(t, err)
+		assert.DeepEqual(t, *a, expected)
+	}
 }

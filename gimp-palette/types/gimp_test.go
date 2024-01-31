@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
+
+	"gotest.tools/v3/assert"
 )
 
 var (
@@ -18,16 +20,11 @@ var (
 
 func readFile(t *testing.T, filePath string) string {
 	filePath, err := filepath.Abs(filePath)
-	if err != nil {
-		t.Errorf("Invalid file path: %s", filePath)
-		return ""
-	}
+	assert.NilError(t, err)
 
 	data, err := os.ReadFile(filePath)
-	if err != nil {
-		t.Errorf("Failed to read file: %s", filePath)
-		return ""
-	}
+	assert.NilError(t, err)
+
 	return string(data)
 }
 
@@ -97,9 +94,7 @@ func TestGIMPPaletteCategory_String(t *testing.T) {
 
 	for _, td := range testData {
 		goldenOutput := readFile(t, getGoldenFilePath(td.goldenFilePath))
-		if actual := td.category.String(); actual != goldenOutput {
-			t.Errorf("Expected golden output \"%s\", got \"%s\"", goldenOutput, actual)
-		}
+		assert.Equal(t, td.category.String(), goldenOutput)
 	}
 }
 
@@ -216,8 +211,6 @@ func TestGIMPPalette_String(t *testing.T) {
 
 	for _, td := range testData {
 		goldenOutput := readFile(t, getGoldenFilePath(td.goldenFilePath))
-		if actual := td.palette.String(); actual != goldenOutput {
-			t.Errorf("Expected golden output \"%s\", got \"%s\"", goldenOutput, actual)
-		}
+		assert.Equal(t, td.palette.String(), goldenOutput)
 	}
 }

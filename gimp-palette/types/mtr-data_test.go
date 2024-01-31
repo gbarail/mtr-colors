@@ -2,6 +2,8 @@ package types
 
 import (
 	"testing"
+
+	"gotest.tools/v3/assert"
 )
 
 func TestGenerateMTRLogoCategory(t *testing.T) {
@@ -21,37 +23,26 @@ func TestGenerateMTRLogoCategory(t *testing.T) {
 	}
 
 	category := GenerateMTRLogoCategory(testData)
-	{ // check category name
-		expectedCategoryName := "MTR logo"
-		if category.Name != expectedCategoryName {
-			t.Errorf("Expected category name to be \"%s\", got \"%s\"",
-				expectedCategoryName, category.Name)
-		}
-	}
-	{ // check colors
-		expectedColors := []Color{
-			// must be sorted
-			{
-				Name: "blue",
-				RGB:  RGB{0, 0, 255},
-			},
-			{
-				Name: "green",
-				RGB:  RGB{0, 255, 0},
-			},
-			{
-				Name: "red",
-				RGB:  RGB{255, 0, 0},
-			},
-		}
 
-		for i, color := range category.Colors {
-			if *color != expectedColors[i] {
-				t.Errorf("Expected color %d to be %v, got %v",
-					i, expectedColors[i], color)
-			}
-		}
-	}
+	// check category name
+	assert.Equal(t, category.Name, MTRLogoCategoryName)
+
+	// check colors
+	assert.DeepEqual(t, category.Colors, []*Color{
+		// must be sorted by name
+		{
+			Name: "blue",
+			RGB:  RGB{0, 0, 255},
+		},
+		{
+			Name: "green",
+			RGB:  RGB{0, 255, 0},
+		},
+		{
+			Name: "red",
+			RGB:  RGB{255, 0, 0},
+		},
+	})
 }
 
 func TestGenerateMTRSystemMapCategories(t *testing.T) {
@@ -96,7 +87,7 @@ func TestGenerateMTRSystemMapCategories(t *testing.T) {
 
 	expectedCategories := []*GIMPPaletteCategory{
 		{
-			Name: "Lines colors",
+			Name: LinesColorsCategoryName,
 			Colors: []*Color{ // sorted by names
 				{
 					Name: "Blue",
@@ -113,7 +104,7 @@ func TestGenerateMTRSystemMapCategories(t *testing.T) {
 			},
 		},
 		{
-			Name: "Miscellaneous colors",
+			Name: MiscellaneousColorsCategoryName,
 			Colors: []*Color{ // sorted by names
 				{
 					Name: "Background",
@@ -127,33 +118,5 @@ func TestGenerateMTRSystemMapCategories(t *testing.T) {
 		},
 	}
 
-	checkCategories := func(actual, expected *GIMPPaletteCategory) {
-		if actual.Name != expected.Name {
-			t.Errorf("Expected category name to be \"%s\", got \"%s\"",
-				expected.Name, actual.Name)
-		}
-		if len(actual.Colors) != len(expected.Colors) {
-			t.Errorf("Expected %d colors, got %d colors",
-				len(expected.Colors), len(actual.Colors))
-		}
-
-		for i, color := range actual.Colors {
-			if *color != *expected.Colors[i] {
-				t.Errorf("Expected color %d to be %v, got %v",
-					i, expected.Colors[i], color)
-			}
-		}
-	}
-
-	{ // check number of categories
-		if len(categories) != len(expectedCategories) {
-			t.Errorf("Expected %d categories, got %d categories",
-				len(expectedCategories), len(categories))
-		}
-	} // check each category
-	{
-		for i, category := range categories {
-			checkCategories(category, expectedCategories[i])
-		}
-	}
+	assert.DeepEqual(t, categories, expectedCategories)
 }
