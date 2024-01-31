@@ -11,14 +11,16 @@ import (
 	"github.com/gbarail/mtr-colors/types"
 )
 
+const PaletteName = "Hong Kong MTR colors"
+
 var (
 	_, filename, _, _ = runtime.Caller(0)
 	outputPath        = path.Join(path.Dir(filename), "output", "mtr-colors.gpl")
 )
 
-func generatePalette() types.GIMPPalette {
+func GeneratePalette() types.GIMPPalette {
 	palette := types.GIMPPalette{
-		Name: "Hong Kong MTR colors",
+		Name: PaletteName,
 	}
 
 	{ // Generate MTR Logo category
@@ -48,7 +50,7 @@ func generatePalette() types.GIMPPalette {
 // Returns two values:
 // * In case of error, return the empty file path, and error.
 // * In case of success, return the actual absolute file path, and nil error.
-func writePaletteToFile(palette *types.GIMPPalette, filePath string) (string, error) {
+func WritePaletteToFile(palette *types.GIMPPalette, filePath string) (string, error) {
 	if !strings.HasSuffix(filePath, GIMPPaletteExtension) {
 		filePath += GIMPPaletteExtension
 	}
@@ -73,9 +75,9 @@ func writePaletteToFile(palette *types.GIMPPalette, filePath string) (string, er
 }
 
 func main() {
-	palette := generatePalette()
+	palette := GeneratePalette()
 
-	outputPath, err := writePaletteToFile(&palette, outputPath)
+	outputPath, err := WritePaletteToFile(&palette, outputPath)
 	if err != nil {
 		panic(err)
 	}
