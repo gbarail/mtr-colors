@@ -6,7 +6,6 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
-	"strings"
 
 	"github.com/gbarail/mtr-colors/types"
 )
@@ -51,9 +50,6 @@ func GeneratePalette() types.GIMPPalette {
 // * In case of error, return the empty file path, and error.
 // * In case of success, return the actual absolute file path, and nil error.
 func WritePaletteToFile(palette *types.GIMPPalette, filePath string) (string, error) {
-	if !strings.HasSuffix(filePath, GIMPPaletteExtension) {
-		filePath += GIMPPaletteExtension
-	}
 	filePath, err := filepath.Abs(filePath)
 	if err != nil {
 		return "", err
