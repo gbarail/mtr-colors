@@ -5,8 +5,8 @@ import "slices"
 type MTRLogoData map[string]*Color
 
 type MTRSystemMapData struct {
-	LinesColors         map[string]*LineColor `yaml:"lines_colors"`
-	MiscellaneousColors map[string]*MiscellaneousColor
+	LinesColors         map[string]*LineColor          `yaml:"lines_colors"`
+	MiscellaneousColors map[string]*MiscellaneousColor `yaml:"miscellaneous_colors"`
 }
 
 type LineColor struct {
